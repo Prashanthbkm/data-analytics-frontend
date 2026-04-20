@@ -1,0 +1,479 @@
+/* KpiCards.css - Modern KPI Cards Design */
+
+/* KPI Grid Container */
+.kpi-grid-container {
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* KPI Card Styles */
+.kpi-card-wrapper {
+  animation: fadeInUp 0.4s ease-out;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kpi-card {
+  position: relative;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  height: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--card-color), var(--card-color-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+}
+
+.kpi-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Card Header */
+.kpi-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.kpi-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  background: var(--icon-bg);
+}
+
+.kpi-card:hover .kpi-icon-wrapper {
+  transform: scale(1.05) rotate(5deg);
+}
+
+.kpi-icon {
+  font-size: 28px;
+  transition: all 0.3s ease;
+}
+
+.kpi-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--card-color);
+  line-height: 1.2;
+  text-align: right;
+  letter-spacing: -0.5px;
+}
+
+/* Card Body */
+.kpi-card-body {
+  margin-top: 8px;
+}
+
+.kpi-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.kpi-subtitle {
+  font-size: 0.7rem;
+  color: #adb5bd;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.kpi-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.trend-up {
+  background: rgba(6, 214, 160, 0.1);
+  color: #06d6a0;
+}
+
+.trend-down {
+  background: rgba(239, 71, 111, 0.1);
+  color: #ef476f;
+}
+
+.trend-neutral {
+  background: rgba(255, 209, 102, 0.1);
+  color: #ffd166;
+}
+
+/* Progress Bar for Success Rate */
+.kpi-progress {
+  margin-top: 12px;
+}
+
+.progress-bar-container {
+  height: 6px;
+  background: #e9ecef;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s ease-out;
+  background: linear-gradient(90deg, var(--card-color), var(--card-color-light));
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 0.65rem;
+  color: #6c757d;
+}
+
+/* Tooltip Button */
+.kpi-tooltip-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+  transition: all 0.2s ease;
+  color: #6c757d;
+}
+
+.kpi-tooltip-btn:hover {
+  opacity: 1;
+  background: #f8f9fa;
+  transform: scale(1.05);
+}
+
+/* Loading State */
+.kpi-loading {
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.loading-bar {
+  height: 4px;
+  background: linear-gradient(90deg, #e9ecef 0%, #667eea 50%, #e9ecef 100%);
+  background-size: 200% 100%;
+  animation: loadingShimmer 1.5s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+@keyframes loadingShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.loading-text {
+  text-align: center;
+  margin-top: 12px;
+  color: #6c757d;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Empty State */
+.kpi-empty {
+  padding: 48px 32px;
+  text-align: center;
+  background: linear-gradient(135deg, #fff8f0 0%, #ffffff 100%);
+  border-radius: 20px;
+  border: 2px dashed #ffd166;
+  margin-bottom: 32px;
+}
+
+.empty-icon-large {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.6;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.empty-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ff9800;
+  margin-bottom: 8px;
+}
+
+.empty-description {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+/* Animation Delays for Cards */
+.kpi-card-wrapper:nth-child(1) { animation-delay: 0.02s; }
+.kpi-card-wrapper:nth-child(2) { animation-delay: 0.06s; }
+.kpi-card-wrapper:nth-child(3) { animation-delay: 0.1s; }
+.kpi-card-wrapper:nth-child(4) { animation-delay: 0.14s; }
+.kpi-card-wrapper:nth-child(5) { animation-delay: 0.18s; }
+.kpi-card-wrapper:nth-child(6) { animation-delay: 0.22s; }
+.kpi-card-wrapper:nth-child(7) { animation-delay: 0.26s; }
+.kpi-card-wrapper:nth-child(8) { animation-delay: 0.3s; }
+.kpi-card-wrapper:nth-child(9) { animation-delay: 0.34s; }
+.kpi-card-wrapper:nth-child(10) { animation-delay: 0.38s; }
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .kpi-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  
+  .kpi-value {
+    font-size: 1.5rem;
+  }
+  
+  .kpi-icon-wrapper {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .kpi-icon {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .kpi-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  
+  .kpi-card {
+    padding: 16px;
+  }
+  
+  .kpi-value {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .kpi-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  
+  .kpi-card {
+    padding: 14px;
+  }
+  
+  .kpi-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+  
+  .kpi-icon {
+    font-size: 20px;
+  }
+  
+  .kpi-value {
+    font-size: 1.1rem;
+  }
+  
+  .kpi-title {
+    font-size: 0.75rem;
+  }
+  
+  .kpi-subtitle {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .kpi-card {
+    padding: 12px;
+  }
+  
+  .kpi-empty {
+    padding: 32px 20px;
+  }
+  
+  .empty-icon-large {
+    font-size: 2.5rem;
+  }
+  
+  .empty-title {
+    font-size: 1rem;
+  }
+}
+
+/* Hover Glow Effect */
+.kpi-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.kpi-card:hover::after {
+  box-shadow: inset 0 0 0 1px rgba(102, 126, 234, 0.2);
+}
+
+/* Pulse Animation for Important Cards */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.kpi-card.important {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Card Variations */
+.kpi-card.gradient-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.kpi-card.gradient-bg .kpi-title,
+.kpi-card.gradient-bg .kpi-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.kpi-card.gradient-bg .kpi-value {
+  color: white;
+}
+
+.kpi-card.gradient-bg .kpi-icon-wrapper {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Tooltip Custom Styles */
+.custom-tooltip {
+  position: fixed;
+  background: #2c3e50;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  max-width: 200px;
+  z-index: 1000;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: tooltipFade 0.2s ease-out;
+}
+
+@keyframes tooltipFade {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .kpi-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #dee2e6;
+  }
+  
+  .kpi-tooltip-btn {
+    display: none;
+  }
+  
+  .kpi-card:hover {
+    transform: none;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .kpi-card,
+  .kpi-icon-wrapper,
+  .kpi-card-wrapper {
+    animation: none;
+    transition: none;
+  }
+  
+  .kpi-card:hover {
+    transform: none;
+  }
+}
